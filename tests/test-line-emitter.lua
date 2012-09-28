@@ -40,4 +40,25 @@ exports['test_line_emitter_multiple_chunks'] = function(test, asserts)
   le:write('\n')
 end
 
+exports['test_line_emitter_multiple_chunks_includeNewLine'] = function(test, asserts)
+  local count = 0
+  local lines = {'test1\n', 'test2\n', 'test3\n', 'test4\n', 'test5\n'}
+  local le = LineEmitter:new('', {includeNewLine = true})
+
+  le:on('data', function(line)
+    count = count + 1
+    asserts.equals(line, lines[count])
+
+    if count == 5 then
+      test.done()
+    end
+  end)
+
+  le:write('test1\n')
+  le:write('test2\n')
+  le:write('test3\n')
+  le:write('test4\ntest5')
+  le:write('\n')
+end
+
 return exports

@@ -4,8 +4,10 @@ local exports = {}
 
 local LineEmitter = iStream:extend()
 
-function LineEmitter:initialize(initialBuffer)
+function LineEmitter:initialize(initialBuffer, options)
+  options = options and options or {}
   self._buffer = initialBuffer and initialBuffer or ''
+  self._includeNewLine = options['includeNewLine']
 end
 
 function LineEmitter:write(chunk)
@@ -26,6 +28,11 @@ function LineEmitter:_popLine()
 
   if index then
     line = self._buffer:sub(0, index - 1)
+
+    if self._includeNewLine then
+      line = line .. '\n'
+    end
+
     self._buffer = self._buffer:sub(index + 1)
   end
 
