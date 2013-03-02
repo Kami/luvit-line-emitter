@@ -1,0 +1,6 @@
+[submodule "modules/bourbon"]
+	path = modules/bourbon
+	url = https://github.com/racker/luvit-bourbon
+[submodule "modules/async"]
+	path = modules/async
+	url = https://github.com/racker/luvit-async

@@ -1,6 +1,7 @@
 language: erlang
 
 script:
+  - git submodule update --init
   - make test
 
 notifications:
