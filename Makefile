@@ -1,9 +1,11 @@
 PWD := $(shell pwd)
 PATH := $(PWD)/luvit/bin:$(PATH)
+LUVIT_VERSION ?= "0.6.0"
 
 test:
-	-luvit -e '' || wget -qct3 https://github.com/luvit/luvit-releases/raw/master/0.6.0/ubuntu12.04/x86_64/luvit.tar.gz
-	-luvit -e '' || tar -xzf luvit.tar.gz
+	(luvit --version | grep $(LUVIT_VERSION)) || wget -qct3 https://github.com/luvit/luvit-releases/raw/master/$(LUVIT_VERSION)/ubuntu12.04/x86_64/luvit.tar.gz
+	(luvit --version | grep $(LUVIT_VERSION)) || tar -xzf luvit.tar.gz
 	luvit $(PWD)/modules/bourbon/bin/bourbon -p $(PWD)/tests
+	rm -rf luvit* 2> /dev/null
 
 .PHONY: test

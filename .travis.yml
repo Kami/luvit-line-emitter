@@ -1,5 +1,9 @@
 language: erlang
 
+env:
+  - LUVIT_VERSION=0.5.0
+  - LUVIT_VERSION=0.6.0
+
 script:
   - git submodule update --init
   - make test
